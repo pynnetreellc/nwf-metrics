@@ -1,0 +1,16 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    - cron: '0 12 */5 * *'  # Every 5 days at noon UTC
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  ping-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        run: |
+          echo "Pinging app to keep Supabase active..."
+          curl -I https://nwf-metrics.streamlit.app
+          echo "Ping complete!"
